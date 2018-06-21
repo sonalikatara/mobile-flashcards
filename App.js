@@ -1,13 +1,35 @@
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React from 'react'
+import { StyleSheet, Text, View } from 'react-native'
+import AddCard from './components/AddCard'
+import { createStore, applyMiddleware, compose } from 'redux'
+import { Provider, Connect } from 'react-redux'
+import thunk from 'redux-thunk'
+import reducer from './reducers'
+import AllDecks from './decks/allDecks'
+import { fetchAllDecks } from './decks/decksAction'
+
 
 export default class App extends React.Component {
   render() {
+    const composeEnhancers = compose
+    const store = createStore(
+      reducer,
+      composeEnhancers(
+          applyMiddleware(thunk)
+      ))
+
+    store.dispatch(fetchAllDecks())
+
     return (
-      <View style={styles.container}>
-        <Text>Fash Cards!</Text>      
-      </View>
-    );
+
+      <Provider store={store}>
+        <View style={styles.container}>
+          <Text>Fash Cards Hello !</Text>  
+          <AllDecks />
+        </View>
+    </Provider>
+ 
+    )
   }
 }
 
