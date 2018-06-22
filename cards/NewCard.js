@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { View, Text, StyleSheet, Platform, TouchableOpacity } from 'react-native'
+import { View, Text, StyleSheet, Platform, TouchableOpacity, TextInput } from 'react-native'
 import { fetchAllDecks } from '../decks/decksAction'
 import { AppLoading } from 'expo'
-import { bgColor, textColor } from '../utils/colors'
+import { bgColor, textColor, inActiveColor,white,deckBgColor } from '../utils/colors'
 import styled from 'styled-components/native'
 
 const CenterView = styled.View`
@@ -13,20 +13,62 @@ const CenterView = styled.View`
     padding-top: 20px;
 `
 
-const DeckView = styled.View`
+const NewCardTextInput = styled.TextInput`
    border: 1px solid ${textColor};
     height: 80px;
-    margin: 10px;
+    margin: 10px 40px;
     justify-content: center;
     align-items: center;
     border-radius: 5px;
+    font-size: 24px;
 `
+
+const CardLabel = styled.Text`
+    color: ${textColor};
+    font-size: 15px;
+    margin: 0px 40px;
+`
+
+const SubmitButton = styled.TouchableOpacity`
+    border: 1px solid ${inActiveColor};
+    height: 50px;
+    margin: 10px 80px;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+    background: ${deckBgColor};
+`
+
+const SubmitButtonLabel = styled.Text`
+    color: ${white};
+    font-size: 15px;
+    margin: 0px 40px;
+`
+
 class NewCard extends Component {
+    state = {
+        question : '',
+        answer : ''
+    }
+
+    static navigationOptions = ({navigation}) => {
+        return {
+            title: 'Add New Card'
+        }
+    }
+
     render(){
          const { deckTitle } = this.props
         return (
             <CenterView>
-               <Text>New card to deck {deckTitle}</Text>
+               <CardLabel>Enter Question</CardLabel>
+               <NewCardTextInput onChangeText={(text) => this.setState({ question: text })}  />
+               <CardLabel>Your Answer</CardLabel> 
+               <NewCardTextInput onChangeText={(text) => this.setState({ answer: text })} />
+               <SubmitButton
+                    onPress={this.submit}>
+                    <SubmitButtonLabel>SUBMIT</SubmitButtonLabel>
+                </SubmitButton>
             </CenterView>
         );
     }
