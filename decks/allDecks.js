@@ -33,7 +33,7 @@ class AllDecks extends Component {
                 {decks.map((deck) => {
                     const { title, questions } = deck
                     return (
-                        <Text style={{ fontSize: 20 }}>
+                        <Text key={title} style={{ fontSize: 20 }}>
                             {title}
                         </Text>
                     )
@@ -44,6 +44,7 @@ class AllDecks extends Component {
 }
 function mapStateToProps(state, ownProps) {
     const decks = state.decksReducer.decks
+    console.log("got all decks " + JSON.stringify(decks))
     return { decks: decks };
 }
 

@@ -5,7 +5,7 @@ import { createStore, applyMiddleware, compose } from 'redux'
 import { Provider, Connect } from 'react-redux'
 import thunk from 'redux-thunk'
 import reducer from './reducers'
-import AllDecks from './decks/allDecks'
+import AllDecks from './decks/AllDecks'
 import { fetchAllDecks } from './decks/decksAction'
 
 
@@ -23,12 +23,11 @@ export default class App extends React.Component {
     return (
 
       <Provider store={store}>
-        <View style={styles.container}>
-          <Text>Fash Cards Hello !</Text>  
+        <View style={{flex: 1}}>
+          <Text>Fash Cards Hello There !</Text>  
           <AllDecks />
         </View>
     </Provider>
- 
     )
   }
 }

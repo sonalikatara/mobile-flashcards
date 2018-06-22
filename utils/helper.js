@@ -1,7 +1,7 @@
 import React from 'react'
 
 export function getDefaultFlashCardsInfo() {
-    console.log("getDefaultFlashCardsInfo")
+    //console.log("getDefaultFlashCardsInfo")
   const info = {
     React: {
       title: 'React',
