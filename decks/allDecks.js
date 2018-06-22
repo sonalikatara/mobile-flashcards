@@ -52,9 +52,10 @@ class AllDecks extends Component {
                 {decks.map((deck) => {
                     const { title, questions } = deck
                     return (
-                        <Text key={title} style={{ fontSize: 20 }}>
-                            {title}
-                        </Text>
+                        <DeckView key={title} >
+                             <Text style={{alignItems:'center', fontSize: 22, fontWeight: 'bold', color: textColor}} >{title}</Text>
++                            <Text style={{fontSize: 14, fontWeight: 'bold'}}>{questions.length} cards</Text>
+                        </DeckView>
                     )
                 })}
             </CenterView>
