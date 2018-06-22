@@ -2,9 +2,11 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { View, Text, StyleSheet, Platform, TouchableOpacity } from 'react-native'
 import { fetchAllDecks } from '../decks/decksAction'
+import { DeckDetails } from '../decks/DeckDetails'
 import { AppLoading } from 'expo'
 import { bgColor, textColor, deckBgColor } from '../utils/colors'
 import styled from 'styled-components/native'
+
 
 const CenterView = styled.View`
     flex: 1;
@@ -52,10 +54,17 @@ class AllDecks extends Component {
                 {decks.map((deck) => {
                     const { title, questions } = deck
                     return (
-                        <DeckView key={title} >
-                             <Text style={{alignItems:'center', fontSize: 22, fontWeight: 'bold', color: textColor}} >{title}</Text>
-+                            <Text style={{fontSize: 14, fontWeight: 'bold'}}>{questions.length} cards</Text>
-                        </DeckView>
+                        <TouchableOpacity key={title} 
+                            onPress={() => this.props.navigation.navigate(
+                                'DeckDetails',
+                                { deckTitle: title }
+                            )}
+                        >
+                            <DeckView>
+                                <Text style={{ alignItems: 'center', fontSize: 22, fontWeight: 'bold', color: textColor }} >{title}</Text>
+                                <Text style={{ fontSize: 14, fontWeight: 'bold' }}>{questions.length} cards</Text>
+                            </DeckView>
+                        </TouchableOpacity>
                     )
                 })}
             </CenterView>
