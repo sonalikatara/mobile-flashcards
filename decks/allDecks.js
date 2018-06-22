@@ -15,7 +15,7 @@ const CenterView = styled.View`
 
 const DeckView = styled.View`
    border: 1px solid ${textColor};
-    height: 60px;
+    height: 80px;
     margin: 10px;
     justify-content: center;
     align-items: center;
