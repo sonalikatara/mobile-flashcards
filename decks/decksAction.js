@@ -1,5 +1,5 @@
 import * as API from '../utils/api'
-import { RECEIVE_DECKS, ADD_DECK } from '../actions'
+import { RECEIVE_DECKS, ADD_DECK, ADD_CARD} from '../actions'
    
 export const receiveDecks = (decks) =>(
    {
@@ -12,7 +12,7 @@ export const fetchAllDecks = () => dispatch => (
        API.fetchAllDecks().then((decks) => dispatch(receiveDecks(decks)))
     );
 
-export const addDeck = decks => ({ //get back new set of decks
+export const addDeck = decks => ({
       type: ADD_DECK,
       decks
   })
@@ -20,3 +20,12 @@ export const addDeck = decks => ({ //get back new set of decks
   export const addNewDeck = (deckName) => dispatch => (
     API.addNewDeck(deckName).then((deck)=> dispatch(addDeck(deck)))
   )
+
+  export const addCard = decks => ({
+    type: ADD_CARD,
+    decks
+})
+
+export const addNewCard = (deckName, card) => dispatch => (
+    API.addNewCard(deckName, card).then((decks) => dispatch(addCard(decks)))
+)

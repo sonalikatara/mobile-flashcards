@@ -77,3 +77,16 @@ export function removeEntry (key) {
      AsyncStorage.setItem(FLASHCARDS_STORAGE_KEY, JSON.stringify(data))
     })
 } 
+
+export async function addNewCard(deckName, newCard){
+  try{
+    let decks = await fetchAllDecks()
+    decks[deckName].questions = [...decks[deckName].questions, newCard]
+    await AsyncStorage.setItem(FLASHCARDS_STORAGE_KEY, JSON.stringify(decks))
+    return decks
+  }
+  catch (error) {
+    console.log(error)
+  }
+  return null
+}

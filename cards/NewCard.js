@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { View, Text, StyleSheet, Platform, TouchableOpacity, TextInput } from 'react-native'
-import { fetchAllDecks } from '../decks/decksAction'
+import {addNewCard } from '../decks/decksAction'
 import { AppLoading } from 'expo'
 import { bgColor, textColor, inActiveColor,white,deckBgColor } from '../utils/colors'
 import styled from 'styled-components/native'
@@ -48,13 +48,27 @@ const SubmitButtonLabel = styled.Text`
 class NewCard extends Component {
     state = {
         question : '',
-        answer : ''
+        answer : '',
+        deckTitle : this.props.deckTitle
     }
 
     static navigationOptions = ({navigation}) => {
         return {
             title: 'Add New Card'
         }
+    }
+
+    submitAddNewCard =() => {
+        const deckTitle = this.state.deckTitle
+
+        const newCard = {
+            question: this.state.question,
+            answer: this.state.answer
+        }
+
+        this.props.addNewCard(deckTitle, newCard)
+        this.setState(() => ({ question: '',  answer: ''}))
+        this.props.navigation.goBack();
     }
 
     render(){
@@ -66,7 +80,7 @@ class NewCard extends Component {
                <CardLabel>Your Answer</CardLabel> 
                <NewCardTextInput onChangeText={(text) => this.setState({ answer: text })} />
                <SubmitButton
-                    onPress={this.submit}>
+                    onPress={this.submitAddNewCard}>
                     <SubmitButtonLabel>SUBMIT</SubmitButtonLabel>
                 </SubmitButton>
             </CenterView>
@@ -74,12 +88,17 @@ class NewCard extends Component {
     }
 }
 
+function mapDispatchToProps(dispatch){
+    return{
+        addNewCard: (deckName, card) => dispatch(addNewCard(deckName, card))
+    }
+}
+
 function mapStateToProps (state, { navigation }) {
-    const { deckTitle } = navigation.state.params
-  
+    const { deckTitle } = navigation.state.params 
     return {
         deckTitle
     }
   }
 
-export default connect(mapStateToProps)(NewCard)
+export default connect(mapStateToProps, mapDispatchToProps)(NewCard)
