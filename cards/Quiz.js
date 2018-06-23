@@ -4,6 +4,7 @@ import { View, Text, StyleSheet, Platform, TouchableOpacity , Animated} from 're
 import { fetchAllDecks } from '../decks/decksAction'
 import { AppLoading } from 'expo'
 import { bgColor, textColor, deckBgColor, white, inActiveColor } from '../utils/colors'
+import { clearLocalNotification, setLocalNotification } from '../utils/helper'
 import styled from 'styled-components/native'
 
 const CenterView = styled.View`
@@ -177,6 +178,7 @@ class Quiz extends Component {
                 scoreCorrect: score,
                 scoreView: true
             })
+            clearLocalNotification().then(setLocalNotification)
         }
     }
 

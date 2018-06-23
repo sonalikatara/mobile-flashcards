@@ -14,7 +14,7 @@ import NewCard from './cards/NewCard'
 import Quiz from './cards/Quiz'
 import { fetchAllDecks } from './decks/decksAction'
 import { bgColor, textColor, inActiveColor, deckBgColor } from './utils/colors'
-
+import { setLocalNotification } from './utils/helper'
 import { Constants } from 'expo'
 import { FontAwesome, Ionicons, Foundation } from '@expo/vector-icons'
 
@@ -37,6 +37,10 @@ function FlashCardsStatusBar ({backgroundColor, ...props}) {
 }
 
 export default class App extends React.Component {
+  componentDidMount(){
+    setLocalNotification()
+  }
+  
 render() {
   const composeEnhancers = compose
   const store = createStore(
