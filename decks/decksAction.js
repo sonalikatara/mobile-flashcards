@@ -16,3 +16,7 @@ export const addDeck = decks => ({ //get back new set of decks
       type: ADD_DECK,
       decks
   })
+
+  export const addNewDeck = (deckName) => dispatch => (
+    API.addNewDeck(deckName).then((deck)=> dispatch(addDeck(deck)))
+  )

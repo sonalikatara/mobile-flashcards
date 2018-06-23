@@ -4,7 +4,7 @@ import { View, Text, StyleSheet, Platform, TouchableOpacity } from 'react-native
 import { fetchAllDecks } from '../decks/decksAction'
 import { DeckDetails } from '../decks/DeckDetails'
 import { AppLoading } from 'expo'
-import { bgColor, textColor, deckBgColor } from '../utils/colors'
+import { bgColor, textColor, deckBgColor, inActiveColor, white } from '../utils/colors'
 import styled from 'styled-components/native'
 
 
@@ -16,13 +16,25 @@ const CenterView = styled.View`
 `
 
 const DeckView = styled.View`
-   border: 1px solid ${textColor};
+   border: 1px solid ${inActiveColor};
     height: 80px;
-    margin: 10px;
+    margin: 20px 40px;
     justify-content: center;
     align-items: center;
     border-radius: 5px;
     background: ${deckBgColor};
+`
+const CardLabel = styled.Text`
+    color: ${white};
+    font-size: 15px;
+    margin: 0px 40px;
+`
+
+const DeckLabel = styled.Text`
+    color: ${textColor};
+    font-size: 20px;
+    font-weight: bold;
+    margin: 0px 40px;
 `
 
 class AllDecks extends Component {
@@ -61,8 +73,8 @@ class AllDecks extends Component {
                             )}
                         >
                             <DeckView>
-                                <Text style={{ alignItems: 'center', fontSize: 22, fontWeight: 'bold', color: textColor }} >{title}</Text>
-                                <Text style={{ fontSize: 14, fontWeight: 'bold' }}>{questions.length} cards</Text>
+                            <DeckLabel>{title}</DeckLabel>
+                                <CardLabel>{questions.length} cards</CardLabel>
                             </DeckView>
                         </TouchableOpacity>
                     )
@@ -71,6 +83,7 @@ class AllDecks extends Component {
         );
     }
 }
+
 function mapStateToProps(state, ownProps) {
     const decks = state.decksReducer.decks
     console.log("got all decks " + JSON.stringify(decks))

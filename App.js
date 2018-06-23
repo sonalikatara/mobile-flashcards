@@ -36,88 +36,89 @@ function FlashCardsStatusBar ({backgroundColor, ...props}) {
       )
 }
 
-const Tabs = createBottomTabNavigator(
-  {
-  Home: {
-    screen: AllDecks,
-    navigationOptions: {
-      tabBarLabel: 'Decks',
-      tabBarIcon: ({ tintColor }) => <Foundation name='clipboard-notes' size={30} color={tintColor} />
-    },
-  },
-  AddDeck: {
-    screen: NewDeck,
-    navigationOptions: {
-      tabBarLabel: 'Add Deck',
-      tabBarIcon: ({ tintColor }) => <FontAwesome name='plus-square' size={30} color={tintColor} />
-    },
-  }
-}, 
-{
-  navigationOptions: {
-    header: null
-  },
-  tabBarOptions: {
-    activeTintColor: textColor,
-    inactiveTintColor:inActiveColor,
-    style: {
-      height: 56,
-      backgroundColor: bgColor,
-      shadowColor: 'rgba(0, 0, 0, 0.24)',
-      shadowOffset: {
-        width: 0,
-        height: 3
-      },
-      shadowRadius: 6,
-      shadowOpacity: 1
-    }
-  }
-}
-)
-
-const Stack = createStackNavigator({
-  Home: {
-    screen: Tabs,
-  },
-  DeckDetails: {
-    screen: DeckDetails,
-    navigationOptions: {
-      headerTintColor: textColor,
-      headerStyle: {
-        backgroundColor: inActiveColor,
-      }
-    }
-  },
-  NewCard: {
-    screen: NewCard,
-    navigationOptions: {
-      headerTintColor: textColor,
-      headerStyle: {
-        backgroundColor: inActiveColor,
-      }
-    }
-  },
-  QuizView: {
-    screen: Quiz,
-    navigationOptions: {
-      headerTintColor: textColor,
-      headerStyle: {
-        backgroundColor: deckBgColor,
-      }
-    }
-  }
-})
-
 export default class App extends React.Component {
-  render() {
-    const composeEnhancers = compose
-    const store = createStore(
-      reducer,
-      composeEnhancers(
-          applyMiddleware(thunk)
-      ))
+render() {
+  const composeEnhancers = compose
+  const store = createStore(
+    reducer,
+    composeEnhancers(
+        applyMiddleware(thunk)
+    ))
 
-    store.dispatch(fetchAllDecks())
+  store.dispatch(fetchAllDecks())
+
+
+  const Tabs = createBottomTabNavigator(
+    {
+    Home: {
+      screen: AllDecks,
+      navigationOptions: {
+        tabBarLabel: 'Decks',
+        tabBarIcon: ({ tintColor }) => <Foundation name='clipboard-notes' size={30} color={tintColor} />
+      },
+    },
+    AddDeck: {
+      screen: NewDeck,
+      navigationOptions: {
+        tabBarLabel: 'Add Deck',
+        tabBarIcon: ({ tintColor }) => <FontAwesome name='plus-square' size={30} color={tintColor} />
+      },
+    }
+  }, 
+  {
+    navigationOptions: {
+      header: null
+    },
+    tabBarOptions: {
+      activeTintColor: textColor,
+      inactiveTintColor:inActiveColor,
+      style: {
+        height: 56,
+        backgroundColor: bgColor,
+        shadowColor: 'rgba(0, 0, 0, 0.24)',
+        shadowOffset: {
+          width: 0,
+          height: 3
+        },
+        shadowRadius: 6,
+        shadowOpacity: 1
+      }
+    }
+  }
+  )
+
+  const Stack = createStackNavigator({
+    Home: {
+      screen: Tabs,
+    },
+    DeckDetails: {
+      screen: DeckDetails,
+      navigationOptions: {
+        headerTintColor: textColor,
+        headerStyle: {
+          backgroundColor: deckBgColor,
+        }
+      }
+    },
+    NewCard: {
+      screen: NewCard,
+      navigationOptions: {
+        headerTintColor: textColor,
+        headerStyle: {
+          backgroundColor: deckBgColor,
+        }
+      }
+    },
+    QuizView: {
+      screen: Quiz,
+      navigationOptions: {
+        headerTintColor: textColor,
+        headerStyle: {
+          backgroundColor: deckBgColor,
+        }
+      }
+    }
+  })
 
     return (
 

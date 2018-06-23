@@ -14,11 +14,13 @@ function decksReducer (state = { decks:[]}, action) {
             return newState
 
       case ADD_DECK :
+      debugger
+        updatedDecks = decks    
         return {
           ...state,
-          ...action.deck,
+         "decks": updatedDecks,
         } 
-        
+
       default :
         return state
     }

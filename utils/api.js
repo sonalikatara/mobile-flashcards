@@ -1,6 +1,6 @@
 import { AsyncStorage } from 'react-native'
 //import getDefaultFlashCardsInfo from './helper'
-const FLASHCARDS_STORAGE_KEY = 'FlashCards:Me'
+const FLASHCARDS_STORAGE_KEY = 'FlashCards:awsome'
 
 function getDefaultFlashCardsInfo() {
   console.log("getDefaultFlashCardsInfo")
@@ -42,14 +42,20 @@ export function fetchAllDecks () {
     }
     
 
- function formatResults(results) {
-       console.log(" format results : " + results)
-       //return results === null ? getDefaultFlashCardsInfo() : JSON.parse(results)
-       return getDefaultFlashCardsInfo()
-
+async function formatResults(results) {
+  if (results === null) {
+        results = getDefaultFlashCardsInfo()
+        try {
+          await AsyncStorage.setItem(FLASHCARDS_STORAGE_KEY, JSON.stringify(results))
+        }
+        catch (error) {
+          console.log(error)
+        }
+      }
+      return JSON.parse(results)
 }
-/*
-export function addNewDeck(deckName) {
+
+export async function addNewDeck(deckName) {
   try {
     let decks = await fetchAllDecks()
     decks[deckName] = { title: deckName, questions: [] }
@@ -59,10 +65,9 @@ export function addNewDeck(deckName) {
   catch (error) {
     console.log("error new deck : " + error)
   }
-
   return null
 }
-*/
+
 export function removeEntry (key) {
   return AsyncStorage.getItem(FLASHCARDS_STORAGE_KEY)
     .then((results) => {
