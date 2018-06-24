@@ -26,6 +26,11 @@ install the dependencies - npm install
 
 start the project with yarn - yarn start
 
+Select i for ios simulator (You will need to have Expo available). Alternatively you can scan the barcode on an Android (but there may be views unavailable in Android)
+
+Play around and have fun on the simulator (Best to view using iPhone 8 )
+
+
 ## The Views
 
 The application has five views.
