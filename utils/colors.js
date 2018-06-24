@@ -11,4 +11,5 @@ export const bgColor =  lightGray
 export const deckBgColor =  lightPurp  
 export const textColor = white 
 export const inActiveColor = '#F58786'
+export const disabledColor = '#EACBC6'
 export const headingColor = '#f04a4f'

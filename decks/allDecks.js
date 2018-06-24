@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { View, Text, StyleSheet, Platform, TouchableOpacity } from 'react-native'
+import { View, Text, StyleSheet, Platform, TouchableOpacity, FlatList } from 'react-native'
 import { fetchAllDecks } from '../decks/decksAction'
-import { DeckDetails } from '../decks/DeckDetails'
+//import { DeckDetails } from '../decks/DeckDetails'
 import { AppLoading } from 'expo'
 import { bgColor, textColor, deckBgColor, inActiveColor, white } from '../utils/colors'
+import ShowDeck from '../decks/showDeck'
 import styled from 'styled-components/native'
 
 
@@ -13,28 +14,6 @@ const CenterView = styled.View`
     align-items: stretch;
     background: ${bgColor};
     padding-top: 20px;
-`
-
-const DeckView = styled.View`
-   border: 1px solid ${inActiveColor};
-    height: 80px;
-    margin: 20px 40px;
-    justify-content: center;
-    align-items: center;
-    border-radius: 5px;
-    background: ${deckBgColor};
-`
-const CardLabel = styled.Text`
-    color: ${white};
-    font-size: 15px;
-    margin: 0px 40px;
-`
-
-const DeckLabel = styled.Text`
-    color: ${textColor};
-    font-size: 20px;
-    font-weight: bold;
-    margin: 0px 40px;
 `
 
 class AllDecks extends Component {
@@ -63,22 +42,9 @@ class AllDecks extends Component {
 
         return (
             <CenterView>
-                {decks.map((deck) => {
-                    const { title, questions } = deck
-                    return (
-                        <TouchableOpacity key={title} 
-                            onPress={() => this.props.navigation.navigate(
-                                'DeckDetails',
-                                { deckTitle: title }
-                            )}
-                        >
-                            <DeckView>
-                            <DeckLabel>{title}</DeckLabel>
-                                <CardLabel>{questions.length} cards</CardLabel>
-                            </DeckView>
-                        </TouchableOpacity>
-                    )
-                })}
+                <FlatList data={decks} renderItem={({ item }) =>
+                    <ShowDeck  deck={item} navigation={this.props.navigation} />
+                } keyExtractor={(item, index) => index}/>
             </CenterView>
         );
     }

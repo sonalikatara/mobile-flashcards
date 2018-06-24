@@ -40,7 +40,7 @@ export default class App extends React.Component {
   componentDidMount(){
     setLocalNotification()
   }
-  
+
 render() {
   const composeEnhancers = compose
   const store = createStore(
@@ -58,7 +58,7 @@ render() {
       screen: AllDecks,
       navigationOptions: {
         tabBarLabel: 'Decks',
-        tabBarIcon: ({ tintColor }) => <Foundation name='clipboard-notes' size={30} color={tintColor} />
+        tabBarIcon: ({ tintColor }) =>  <Ionicons name="ios-albums" size={40} color={tintColor} /> 
       },
     },
     AddDeck: {
@@ -94,6 +94,12 @@ render() {
   const Stack = createStackNavigator({
     Home: {
       screen: Tabs,
+      navigationOptions: {
+        headerTintColor: textColor,
+        headerStyle: {
+          backgroundColor: deckBgColor,
+        }
+      }
     },
     DeckDetails: {
       screen: DeckDetails,
@@ -128,7 +134,7 @@ render() {
 
       <Provider store={store}>
         <View style={{flex: 1}}>
-          <FlashCardsStatusBar backgroundColor={textColor} tintColor={textColor} barStyle="light-content" />
+          <FlashCardsStatusBar backgroundColor={deckBgColor} tintColor={deckBgColor} barStyle="light-content" />
           <Stack />
         </View>
     </Provider>

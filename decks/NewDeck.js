@@ -5,7 +5,7 @@ import { View, Text, StyleSheet, Platform, TouchableOpacity, TextInput } from 'r
 import { bgColor, textColor, inActiveColor, white, deckBgColor} from '../utils/colors'
 import styled from 'styled-components/native'
 import { AppLoading } from 'expo'
-
+import {StackActions, NavigationActions } from 'react-navigation'
 
 const CenterView = styled.View`
    flex: 1;
@@ -48,7 +48,8 @@ const SubmitButtonLabel = styled.Text`
 class NewDeck extends Component {
     state = {
         decks: this.props.decks,
-        newDeckName: ''
+        newDeckName: '',
+        deckDuplicate: false
     }
 
     componenentWillReceiveProps(nextProps){
@@ -60,27 +61,42 @@ class NewDeck extends Component {
                    }
     }
 
+    validateDeck(deckName) {
+        this.setState({ newDeckName: deckName })
+    }
+
+    toDeckDetails = (newDeckName) => {
+       /* this.props.navigation.navigate(
+            'DeckDetails',
+            { deckTitle: newDeckName }
+        )*/
+        this.setState(() => ({ newDeckName: '', deckDuplicate: false}))
+       const resetNavigationAction = StackActions.reset({
+            index: 1,
+            actions: [
+              NavigationActions.navigate({ routeName: 'Home'}),
+              NavigationActions.navigate({ routeName: 'DeckDetails',  params: {deckTitle: newDeckName}})
+            ]
+          })
+        this.props.navigation.dispatch(resetNavigationAction) 
+    }
+
     submit = () => {
         const newDeckName = this.state.newDeckName
         this.props.addNewDeck(newDeckName)
 
-        this.setState(() => ({ newDeckName: '' }))
+        //this.setState(() => ({ newDeckName: '' }))
         this.toDeckDetails(newDeckName)
     }
 
-    toDeckDetails = (newDeckName) => {
-        this.props.navigation.navigate(
-            'DeckDetails',
-            { deckTitle: newDeckName }
-        )
-    }
-
+   
     render(){
         const decks = this.state.decks ? this.state.decks : []
+        
         return (
             <CenterView>
                 <DeckLabel>Deck Name</DeckLabel>
-                <NewDeckView onChangeText={(text) => this.setState({ newDeckName: text })} />
+                <NewDeckView value={this.state.newDeckName} onChangeText={(text) => this.validateDeck(text)} />
                 <SubmitButton
                     onPress={this.submit}>
                     <SubmitButtonLabel>SUBMIT</SubmitButtonLabel>

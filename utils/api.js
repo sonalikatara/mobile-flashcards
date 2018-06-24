@@ -47,6 +47,7 @@ async function formatResults(results) {
         results = getDefaultFlashCardsInfo()
         try {
           await AsyncStorage.setItem(FLASHCARDS_STORAGE_KEY, JSON.stringify(results))
+          return results
         }
         catch (error) {
           console.log(error)
