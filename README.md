@@ -36,7 +36,7 @@ displays the title of each Deck
 
 displays the number of cards in each deck
 
-![Main Page](./src/images/home.jpg)
+![Main Page](./images/home.jpg)
 
 ### Deck View List : Individual Deck View
 
@@ -48,7 +48,7 @@ displays an option to start a quiz on this specific deck
 
 An option to add a new question to the deck
 
-![Deck Details Page](./src/images/deckDetails.jpg)
+![Deck Details Page](./images/deckDetails.jpg)
 
 ### Quiz View
 
@@ -77,4 +77,4 @@ An option to enter in the answer
 
 An option to submit the new question
 
-![New Card Page](./src/images/newCard.jpg)
+![New Card Page](./images/newCard.jpg)
