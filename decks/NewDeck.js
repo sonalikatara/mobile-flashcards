@@ -95,6 +95,7 @@ class NewDeck extends Component {
         
         return (
             <CenterView>
+                <DeckLabel>CREATE A NEW DECK</DeckLabel>
                 <DeckLabel>Deck Name</DeckLabel>
                 <NewDeckView value={this.state.newDeckName} onChangeText={(text) => this.validateDeck(text)} />
                 <SubmitButton

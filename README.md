@@ -1,4 +1,4 @@
-##Specific Requirements
+## Specific Requirements
 
 Use create-react-native-app to build your project.
 
@@ -68,6 +68,8 @@ an "Incorrect" button
 the number of cards left in the quiz
 
 Displays the percentage correct once the quiz is complete
+
+![Quiz Page](./images/quiz.jpg)
 
 ### New Deck View
 
