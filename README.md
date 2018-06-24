@@ -78,3 +78,7 @@ An option to enter in the answer
 An option to submit the new question
 
 ![New Card Page](./images/newCard.jpg)
+
+## License
+
+The contents of this repository are covered under the MIT License.
