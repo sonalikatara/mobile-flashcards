@@ -1,6 +1,6 @@
 import { AsyncStorage } from 'react-native'
 //import getDefaultFlashCardsInfo from './helper'
-const FLASHCARDS_STORAGE_KEY = 'FlashCards:awsome'
+const FLASHCARDS_STORAGE_KEY = 'FlashCards:one'
 
 function getDefaultFlashCardsInfo() {
   console.log("getDefaultFlashCardsInfo")

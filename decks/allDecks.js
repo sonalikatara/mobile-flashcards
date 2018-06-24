@@ -44,7 +44,7 @@ class AllDecks extends Component {
             <CenterView>
                 <FlatList data={decks} renderItem={({ item }) =>
                     <ShowDeck  deck={item} navigation={this.props.navigation} />
-                } keyExtractor={(item, index) => index}/>
+                } keyExtractor={(item, index) => index.toString()}/>
             </CenterView>
         );
     }
@@ -52,7 +52,7 @@ class AllDecks extends Component {
 
 function mapStateToProps(state, ownProps) {
     const decks = state.decksReducer.decks
-    console.log("got all decks " + JSON.stringify(decks))
+   // console.log("got all decks " + JSON.stringify(decks))
     return { decks: decks };
 }
 

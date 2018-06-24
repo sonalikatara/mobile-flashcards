@@ -30,12 +30,12 @@ class ShowDeck extends Component {
 
     render() {
         const { title, questions } = typeof this.props.deck !== undefined ? this.props.deck : { title: '', questions: [] }
-
+        const deckDetailsTitle = title + " deck with " + questions.length + " cards"  
         return (
             <TouchableOpacity
                 onPress={() => this.props.navigation.navigate(
                     'DeckDetails',
-                    { deckTitle: title }
+                    { deckTitle: deckDetailsTitle }
                 )}
             >
                 <DeckView>
